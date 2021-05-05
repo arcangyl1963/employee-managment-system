@@ -119,7 +119,29 @@ addEmployee = () => {
           console.log(`${res.firstName} ${res.lastName} has been added to the employee database. \n`);
           usrResp();
         }
-      )
-    })
-
+      );
+    });
+}
+// Add a new role to the database
+addRole = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter role title:',
+      name: 'title'
+    },
+    {
+      type: 'integer',
+      message: 'Enter role salary:',
+      name: 'salary'
+    },
+    {
+      type: 'integer',
+      message: 'Enter the department ID for the role:',
+      name: 'department_id'
+    }
+  ])
+  .then ( (res) => {
+    connection.query ('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [res,])
+  })
 }
