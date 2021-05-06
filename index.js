@@ -1,19 +1,20 @@
-const consoleTable = require('console.table');
+require('dotenv').config();
+require('console.table');
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-const dotenv = require('dotenv').config();
 
-let connection = mysql.createConnection({
+
+const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  username: process.env.DB_USER,
+  user: process.env.DB_USER,
   password: process.env.DB_PASS,
-});
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log(`\n connected as id ${connection.threadId} \n`);
-  usrResp();
+  database: process.env.DB_NAME
+  // host: 'localhost',
+  // port: 3306,
+  // user: 'root',
+  // password: 'trOubl3d1',
+  // database: 'employees_DB'
 });
 
 usrResp = () => {
@@ -142,6 +143,65 @@ addRole = () => {
     }
   ])
   .then ( (res) => {
-    connection.query ('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [res,])
-  })
+    connection.query ('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [res.title, res.salary, res.department_id], (err, data) => {
+      if (err) throw err;
+      console.log(`${res.title} has been entered into the database. \n`);
+      usrResp();
+    })
+  });
 }
+// Updates the role by id for an employee
+updateEmpRole = () => {
+  inquirer.prompt([
+    {
+    type: 'input',
+    message: 'Enter the ID of the employee whose role will be updated:',
+    name: 'id'
+    },
+    {
+      type: 'integer',
+      message: 'Enter the ID of the new role:',
+      name: 'role_id'
+    }
+  ])
+  .then ( (resp) => {
+    connection.query ('UPDATE employee SET role_id = ? WHERE id = ?', [resp.role_id, resp.id], (err, data) => {
+      if (err) throw err;
+      console.table(data);
+      usrResp();
+    })
+  });
+};
+// View all departments
+viewDept = () => {
+  connection.query('SELECT * FROM department', (err, data) => {
+    if (err) throw err;
+    console.log(`\n`);
+    console.table(data);
+    usrResp();
+  })
+};
+// View all employees
+viewEmployees = () => {
+  connection.query('SELECT * FROM employee', (err, data) => {
+    if (err) throw err;
+    console.log(`\n`);
+    console.table(data);
+    usrResp();
+  })
+};
+// View all roles
+viewRoles = () => {
+  connection.query('SELECT * FROM role', (err, data) => {
+    if (err) throw err;
+    console.log(`\n`);
+    console.table(data);
+    usrResp();
+  })
+};
+// connect to the mysql server and database
+connection.connect(err => {
+  if (err) throw err;
+  console.log(`\n connected as id ${connection.threadId} \n`);
+  usrResp();
+});
