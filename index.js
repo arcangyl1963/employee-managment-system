@@ -23,26 +23,33 @@ usrResp = () => {
       message: 'What task would you like to perform?',
       type: 'list',
       choices: [
-        'Add a department',
-        'Add a role',
-        'Add an employee',
+        'ADD a department',
+        'ADD a role',
+        'ADD an employee',
         'View all departments',
         'View all roles',
         'View all employees',
+        'View employees by manager',
+        'View utilized budget by department',
         'Update an employee role',
+        'Update an employee manager',
+        'Update an employee role department',
+        'DELETE a department',
+        'DELETE a role',
+        'DELETE an employee',
         'Exit',
       ],
       name: 'choice',
     })
     .then((responses) => {
       switch (responses.choice) {
-        case 'Add a department':
+        case 'ADD a department':
           addDept();
           break;
-        case 'Add a role':
+        case 'ADD a role':
           addRole();
           break;
-        case 'Add an employee':
+        case 'ADD an employee':
           addEmployee();
           break;
         case 'View all departments':
@@ -54,8 +61,29 @@ usrResp = () => {
         case 'View all employees':
           viewEmployees();
           break;
+        case 'View employees by manager':
+          viewEmpByMgr();
+          break;
+        case 'View utilized budget by department':
+          viewUtilBudget();
+          break;
         case 'Update an employee role':
           updateEmpRole();
+          break;
+        case 'Update an employee manager':
+          updateEmpMgr();
+          break;
+        case 'Update an employee role department':
+          updateEmpRoleDept();
+          break;
+        case 'DELETE a department':
+          deleteDept();
+          break;
+        case 'DELETE a role':
+          deleteRole();
+          break;
+        case 'DELETE an employee':
+          deleteEmployee();
           break;
         default:
           connection.end();
@@ -150,28 +178,6 @@ addRole = () => {
     })
   });
 }
-// Updates the role by id for an employee
-updateEmpRole = () => {
-  inquirer.prompt([
-    {
-    type: 'input',
-    message: 'Enter the ID of the employee whose role will be updated:',
-    name: 'id'
-    },
-    {
-      type: 'integer',
-      message: 'Enter the ID of the new role:',
-      name: 'role_id'
-    }
-  ])
-  .then ( (resp) => {
-    connection.query ('UPDATE employee SET role_id = ? WHERE id = ?', [resp.role_id, resp.id], (err, data) => {
-      if (err) throw err;
-      console.table(data);
-      usrResp();
-    })
-  });
-};
 // View all departments
 viewDept = () => {
   connection.query('SELECT * FROM department', (err, data) => {
@@ -199,6 +205,196 @@ viewRoles = () => {
     usrResp();
   })
 };
+// View employees by manager
+viewEmpByMgr = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+    message: 'Enter the ID of the manager:',
+    name: 'id'
+    },
+  ])
+  .then ( (resp) => {
+    connection.query(`SELECT * FROM employee WHERE manager_id = ${resp.id}`, (err, data) => {
+      if (err) throw err;
+      console.log(`\n`);
+      console.table(data);
+      usrResp();
+    })
+  })
+};
+// View utilized budget by department
+viewUtilBudget = () => {
+  inquirer.prompt([
+    {
+      type: 'integer',
+    message: 'Enter the ID of the department budget to be viewed:',
+    name: 'id'
+    },
+    {
+      type: 'input',
+    message: 'Enter the name of the department budget to be viewed:',
+    name: 'name'
+    },
+  ])
+  .then ( (resp) => {
+    connection.query(`SELECT SUM(salary) AS total FROM role WHERE department_id = ${resp.id}`, [], (err, data) => {
+      let budget;
+      if (err) throw err;
+      budget = JSON.stringify(data[0]);
+      utilBudget = JSON.parse(budget);
+      console.log(`\n`);
+      console.log(`${resp.name}'s utilized budget is $${utilBudget.total}.`);
+      usrResp();
+    })
+  })
+};
+// Updates the role by id for an employee
+updateEmpRole = () => {
+  inquirer.prompt([
+    {
+    type: 'input',
+    message: 'Enter the ID of the employee whose role will be updated:',
+    name: 'id'
+    },
+    {
+      type: 'integer',
+      message: 'Enter the ID of the new role:',
+      name: 'role_id'
+    }
+  ])
+  .then ( (resp) => {
+    connection.query ('UPDATE employee SET role_id = ? WHERE id = ?', [resp.role_id, resp.id], (err, data) => {
+      if (err) throw err;
+      console.table(data);
+      usrResp();
+    })
+  });
+};
+// Updates the manager by id for an employee
+updateEmpMgr = () => {
+  inquirer.prompt([
+    {
+    type: 'input',
+    message: 'Enter the ID of the employee whose manager will be updated:',
+    name: 'id'
+    },
+    {
+      type: 'integer',
+      message: 'Enter the ID of the new manager:',
+      name: 'manager_id'
+    }
+  ])
+  .then ( (resp) => {
+    connection.query ('UPDATE employee SET manager_id = ? WHERE id = ?', [resp.manager_id, resp.id], (err, data) => {
+      if (err) throw err;
+      console.table(data);
+      usrResp();
+    })
+  });
+};
+// Updates the department by id for an employee role
+updateEmpRoleDept = () => {
+  inquirer.prompt([
+    {
+    type: 'input',
+    message: 'Enter the ID of the employee role whose department will be updated:',
+    name: 'id'
+    },
+    {
+      type: 'integer',
+      message: 'Enter the ID of the new department:',
+      name: 'department_id'
+    }
+  ])
+  .then ( (resp) => {
+    connection.query ('UPDATE role SET department_id = ? WHERE id = ?', [resp.department_id, resp.id], (err, data) => {
+      if (err) throw err;
+      console.table(data);
+      usrResp();
+    })
+  });
+};
+// DELETE a department from the database
+deleteDept = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Enter the name of the department to be DELETED:',
+      },
+      {
+        type: 'integer',
+        message: 'Enter the ID of the department to be DELETED:',
+        name: 'id'
+        }
+    ])
+    .then ( (res) => {
+      connection.query(
+        `DELETE FROM department WHERE name = '${res.name}' AND id = '${res.id}'`, (err, data) => {
+          if (err) throw err;
+          console.log(`\n The ${res.name} department has been deleted from the database. \n`);
+          usrResp();
+        }
+      );
+    });
+}
+// DELETE a role from the database
+deleteRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'title',
+        message: 'Enter the title of the role to be DELETED:',
+      },
+      {
+        type: 'integer',
+        message: 'Enter the ID of the role to be DELETED:',
+        name: 'id'
+        }
+    ])
+    .then ( (res) => {
+      connection.query(
+        `DELETE FROM role WHERE title = '${res.title}' AND id = '${res.id}'`, (err, data) => {
+          if (err) throw err;
+          console.log(`\n The ${res.title} role has been deleted from the database. \n`);
+          usrResp();
+        }
+      );
+    });
+}
+// DELETE an employee from the database
+deleteEmployee = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'firstName',
+        message: 'Enter the first name of the employee to be DELETED:',
+      },
+      {
+        type: 'input',
+        name: 'lastName',
+        message: 'Enter the last name of the employee to be DELETED:',
+      },
+      {
+        type: 'integer',
+        message: 'Enter the ID of the employee to be DELETED:',
+        name: 'id'
+        },
+    ])
+    .then ( (res) => {
+      connection.query(
+        `DELETE FROM employee WHERE first_name = '${res.firstName}' AND last_name = '${res.lastName}' AND id = '${res.id}'`, (err, data) => {
+          if (err) throw err;
+          console.log(`\n ${res.firstName} ${res.lastName} has been deleted from the employee database. \n`);
+          usrResp();
+        }
+      );
+    });
+}
 // connect to the mysql server and database
 connection.connect(err => {
   if (err) throw err;
