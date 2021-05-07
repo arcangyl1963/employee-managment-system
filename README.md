@@ -41,11 +41,11 @@ My files can be accessed in the repository [HERE](https://github.com/arcangyl196
 
 The image below shows the repository where my project files are located:
 
-![Employee Tracker App Repository](./public/assets/images/note-taker-app_gitrepo.png)
+![Employee Tracker App Repository](../employee-tracker-db/assets/images/emp_tracker_githubrepo.png)<br>
 
-Install the application by cloning the repo from the link above or by downloading the files to your local drive.
+Install the application by cloning the repo from the link above or by downloading the files to your local drive.<br>
 
-The repository will contain all of the files needed to run the application:
+The repository will contain all of the files needed to run the application:<br>
 
 * A 'sql' directory containing the schema and seed files for creating the database with tables and populating the tables with placeholder records.
 * An 'assets' directory containing the image files for the README document.
@@ -65,6 +65,7 @@ This will install any package dependencies defined in the package.json file.<br>
 If you do not have MySQL installed on your system, you will need to install it as well. Download the appropriate installer for your operating system from [here](https://dev.mysql.com/downloads/installer/) and follow the instructions provided by the installer.<br>
 
 Before launching the application, you will need to create the database with inserted tables using the schema.sql file, and then seed the database with placeholder data from the seed.sql file. This can be done in the MySQL CLI or from a SQL connection GUI application such as MySQL Workbench or Sequel Pro.<br>
+
 To create the database using the CLI:
   In Terminal or a similar BASH utility, enter:
   ~~~
@@ -91,38 +92,44 @@ CREATE DATABASE employees_DB;
     PRIMARY KEY (id)
   );
 ~~~
-Paste the remaining CREATE TABLE command strings for the 'role' and 'employee' tables to create them as well.
+Paste the remaining CREATE TABLE command strings for the 'role' and 'employee' tables to create them as well.<br>
 
 Once the database has been created and the tables seeded, you are now ready to launch the application.<br>
 
 ---
 
 ## Usage:<br>
-To run the application locally type the following into Terminal or the command-line utility of your choice:
+To run the application locally type the following into Terminal or the command-line utility of your choice:<br>
 
 ~~~
 node index.js
 ~~~
 
+![Employee Tracker App running app screen](../employee-tracker-db/assets/images/emp_tracker_mainappscreen.png)<br>
+
 The application loads a list of available tasks that can be performed. Use the UP and DOWN arrow keys to navigate through the list. Highlight the task you want to perform and hit Enter.<br>
 
-![Note Taker App landing page](./public/assets/images/note-taker-app_landing.png)
+![Employee Tracker App task list](../employee-tracker-db/assets/images/emp_tracker_maintasklist.png)<br>
 
-The right side of the note panel contains the title entry field and the note text entry field where the user enters the note information. The left side displays the list of saved notes.
+A series of instruction prompts will appear based on the task selected from the list.<br>
 
-![Note Taker App note page](./public/assets/images/note-taker-app_notes.png)
+![Employee Tracker App view all departments](../employee-tracker-db/assets/images/emp_tracker_viewalldepts.png)<br>
 
-When the user enters a title and the note text into the text area, a Save icon will display next to the New Note icon.
+The results of the query will display below.<br>
 
-![Note Taker App note enter](./public/assets/images/note-taker-app_notes-enter.png)
+![Employee Tracker App view all employees](../employee-tracker-db/assets/images/emp_tracker_viewallemployees.png)<br>
 
-Clicking the Save icon will save the note to the database file and the note will display in the left-side note list.
+![Employee Tracker App view all roles](../employee-tracker-db/assets/images/emp_tracker_viewallroles.png)<br>
 
-![Note Taker App note page](./public/assets/images/note-taker-app_notes-saved.png)
+BONUS: The bonus feature to view the utilized budget (payroll) for a department was also implemented.<br>
 
-When the user clicks on one of the notes in the note list, the title and contents of the note will display in the text area to the right.
+![Employee Tracker App view department utilized budget](../employee-tracker-db/assets/images/emp_tracker_viewutilbudget.png)<br>
 
-![Note Taker App note page](./public/assets/images/note-taker-app_notes-display-selected.png)
+To see the DELETE and UPDATE tasks for employee, department, and role in action, check out the walk-through video below.<br>
+
+## Walk-through Demo Video:<br>
+
+A walk-through video demo using the application can be seen [here](https://youtu.be/x9XOaoU4u5g).<br>
 
 ---
 
@@ -140,12 +147,7 @@ James Harris<br>
 
 ## Tests:<br>
 
-There were 4 tests created for each of the classes. All 4 tests passed during testing.<br>
-To run the tests, enter the following command into Terminal or command-line bash utility of your choice:<br>
-
-~~~
-npm test
-~~~
+There were no tests created for this application<br>
 
 ---
 
