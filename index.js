@@ -31,9 +31,9 @@ usrResp = () => {
         'View all employees',
         "View a manager's employees",
         'View utilized budget by department',
-        'Update an employee role',
+        'Update the role of an employee',
         'Update an employee manager',
-        'Update an employee role department',
+        'Update the department of a role',
         'DELETE a department',
         'DELETE a role',
         'DELETE an employee',
@@ -67,13 +67,13 @@ usrResp = () => {
         case 'View utilized budget by department':
           viewUtilBudget();
           break;
-        case 'Update an employee role':
+        case 'Update the role of an employee':
           updateEmpRole();
           break;
         case 'Update an employee manager':
           updateEmpMgr();
           break;
-        case 'Update an employee role department':
+        case 'Update the department of a role':
           updateEmpRoleDept();
           break;
         case 'DELETE a department':
