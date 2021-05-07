@@ -41,7 +41,7 @@ My files can be accessed in the repository [HERE](https://github.com/arcangyl196
 
 The image below shows the repository where my project files are located:
 
-![Employee Tracker App Repository](../employee-tracker-db/assets/./images/emp_tracker_githubrepo.png)<br>
+![Employee Tracker App Repository](./images/emp_tracker_githubrepo.png)<br>
 
 Install the application by cloning the repo from the link above or by downloading the files to your local drive.<br>
 
@@ -105,7 +105,7 @@ To run the application locally type the following into Terminal or the command-l
 node index.js
 ~~~
 
-![Employee Tracker App running app screen](./assets/./images/emp_tracker_mainappscreen.png)<br>
+![Employee Tracker App running app screen](./images/emp_tracker_mainappscreen.png)<br>
 
 The application loads a list of available tasks that can be performed. Use the UP and DOWN arrow keys to navigate through the list. Highlight the task you want to perform and hit Enter.<br>
 
