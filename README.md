@@ -91,7 +91,7 @@ CREATE DATABASE employees_DB;
     PRIMARY KEY (id)
   );
 ~~~
-Paste the remaining CREATE TABLE command strings for the 'roles' and 'employees' tables to create them as well.
+Paste the remaining CREATE TABLE command strings for the 'role' and 'employee' tables to create them as well.
 
 Once the database has been created and the tables seeded, you are now ready to launch the application.<br>
 
