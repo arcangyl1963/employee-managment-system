@@ -29,7 +29,7 @@ usrResp = () => {
         'View all departments',
         'View all roles',
         'View all employees',
-        'View employees by manager',
+        "View a manager's employees",
         'View utilized budget by department',
         'Update an employee role',
         'Update an employee manager',
@@ -61,7 +61,7 @@ usrResp = () => {
         case 'View all employees':
           viewEmployees();
           break;
-        case 'View employees by manager':
+        case "View a manager's employees":
           viewEmpByMgr();
           break;
         case 'View utilized budget by department':
