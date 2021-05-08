@@ -1,13 +1,13 @@
 
-# Employee Tracker App<br>
+# Employee Management System<br>
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)<br>
 
 ## Description:<br>
 
-The Employee Tracker App is an ExpressJS and MySQL database application for managing and tracking employees, departments and roles within an organization. MySQL is used to store the employee data long-term within a database table structure. Users can enter new employees, update and delete existing employees, and manage departments and employee roles within the database with a simple command-line interface where data can be input in response to a series of prompts specifically for the task selected.<br>
+The Employee Management System is an ExpressJS and MySQL database application for managing and tracking employees, departments and roles within an organization. MySQL is used to store the employee data long-term within a database table structure. Users can enter new employees, update and delete existing employees, and manage departments and employee roles within the database with a simple command-line interface where data can be input in response to a series of prompts specifically for the task selected.<br>
 
-The Employee Tracker App utilizes the following technologies:
+The Employee Management System utilizes the following technologies:
   * JavaScript
   * NODE.JS
   * NPM packages:
@@ -41,7 +41,7 @@ My files can be accessed in the repository [HERE](https://github.com/arcangyl196
 
 The image below shows the repository where my project files are located:
 
-![Employee Tracker App Repository](./images/emp_tracker_githubrepo.png)<br>
+![Employee Management System Repository](./images/emp_tracker_githubrepo.png)<br>
 
 Install the application by cloning the repo from the link above or by downloading the files to your local drive.<br>
 
@@ -105,25 +105,25 @@ To run the application locally type the following into Terminal or the command-l
 node index.js
 ~~~
 
-![Employee Tracker App running app screen](./images/emp_tracker_mainappscreen.png)<br>
+![Employee Management System running app screen](./images/emp_tracker_mainappscreen.png)<br>
 
 The application loads a list of available tasks that can be performed. Use the UP and DOWN arrow keys to navigate through the list. Highlight the task you want to perform and hit Enter.<br>
 
-![Employee Tracker App task list](./images/emp_tracker_maintasklist.png)<br>
+![Employee Management System task list](./images/emp_tracker_maintasklist.png)<br>
 
 A series of instruction prompts will appear based on the task selected from the list.<br>
 
-![Employee Tracker App view all departments](./images/emp_tracker_viewalldepts.png)<br>
+![Employee Management System view all departments](./images/emp_tracker_viewalldepts.png)<br>
 
 The results of the query will display below.<br>
 
-![Employee Tracker App view all employees](./images/emp_tracker_viewallemployees.png)<br>
+![Employee Management System view all employees](./images/emp_tracker_viewallemployees.png)<br>
 
-![Employee Tracker App view all roles](./images/emp_tracker_viewallroles.png)<br>
+![Employee Management System view all roles](./images/emp_tracker_viewallroles.png)<br>
 
 BONUS: The bonus feature to view the utilized budget (payroll) for a department was also implemented.<br>
 
-![Employee Tracker App view department utilized budget](./images/emp_tracker_viewutilbudget.png)<br>
+![Employee Management System view department utilized budget](./images/emp_tracker_viewutilbudget.png)<br>
 
 To see the DELETE and UPDATE tasks for employee, department, and role in action, check out the walk-through video below.<br>
 
